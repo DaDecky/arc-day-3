@@ -3,14 +3,24 @@ const axios = require("axios");
 
 let savedUser = [];
 
-async function getUser(id) {
+async function getUser(id, callback) {
   let url = `https://jsonplaceholder.typicode.com/users/${id}`;
   try {
     const response = await axios.get(url);
     console.log(response.data);
-    return response.data;
+    if (callback) {
+      callback(id);
+    }
   } catch (error) {
     console.error("Error:", error);
+  }
+}
+
+function saveUserCallback(id) {
+  let save = prompt("Would you like to save this user info? (y/n)");
+  if (save == "y") {
+    savedUser.push(id);
+    console.log("User info saved!");
   }
 }
 
@@ -28,13 +38,7 @@ async function main() {
       case "1":
         let id = prompt("Which Id? (1-10) ");
         console.log(`Getting user info with id: ${id}`);
-        await getUser(id);
-        let save = prompt("Would you like to save this user info? (y/n)");
-        if (save == "y") {
-          savedUser.push(id);
-          console.log("User info saved!");
-        }
-
+        await getUser(id, saveUserCallback);
         break;
       case "2":
         console.log("Saved user info:");
