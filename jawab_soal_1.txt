@@ -1,0 +1,1 @@
+Axios adalah HTTP Client yang berbasis promise untuk node.js dan browser. Axios bersifat isomorphic yang berarti bisa dijalankan di web dan node.js dengan codebase yang sama. Di server-side, axios menggunakan http module yang native pada node.js, sedangkan pada client-side menggunakan XMLHttpRequests
